@@ -1,0 +1,72 @@
+
+<% if current_user %>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/"> <h4>Hello <%= current_user.email %></h4></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-md-auto gap-2">
+        <li class="nav-item rounded">
+          <a class="nav-link active" aria-current="page" href="/"><i class="bi bi-house-fill me-2"></i>Home</a>
+        </li>
+        <li class="nav-item rounded">
+         <%= link_to projects_path, class: "nav-link" do %>
+            <i class="bi bi-clipboard2-plus-fill"></i> Projects
+          <% end %>
+          
+        </li>
+        <li class="nav-item dropdown rounded">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person-fill me-2"></i>Profile</a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="#">Account</a></li>
+            <li><%= link_to edit_user_registration_path, class: "dropdown-item" do %>  
+                Edit
+              <% end %></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li><%= button_to  destroy_user_session_path, method: :delete, class: "dropdown-item" do %> 
+              Logout 
+            <% end %>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav><br />
+<div class="container border border-dark rounded bg-dark"> 
+  <div class="">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <h3 class="animate-charcter"> Welcome</h3><br /> <br />
+          <h3 class="animate-charcter"> To My Basecamp</h3>
+        </div>
+      </div>
+    </div><br />
+  <br />
+  <br />
+  <br />
+  <div class="container border border-white rounded-top">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <h3 class="animate-charcter1"> I developed a clone version of Basecamp to allow people to share their projects with others and finish the project together.</h3><br /> <br />
+        </div>
+      </div>
+
+    </div>
+  </div>
+    <br />
+    <br />
+  </div>   
+</div>
+<% else %>
+
+<%= render 'pages/dashboard' %>
+
+<% end %>
+

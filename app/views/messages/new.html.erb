@@ -1,0 +1,63 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/"> <h4>Hello <%= current_user.email %></h4></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-md-auto gap-2">
+        <li class="nav-item rounded">
+          <a class="nav-link active" aria-current="page" href="/"><i class="bi bi-house-fill me-2"></i>Home</a>
+        </li>
+
+
+       
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav><br />
+
+<%= form_with(model: @message) do |form| %>
+  <% if @message.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(@message.errors.count, "error") %> prohibited this disc from being saved:</h2>
+
+      <ul>
+        <% @message.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div class="container border border-dark">
+      <h1 align="center">New message</h1>
+
+  
+      <div class="input-group">
+        <%= form.text_field :title, class: "form-control", placeholder: "Title" %>
+      </div><br />
+
+
+      <div class="input-group">
+        <%= form.text_area :description, class: "form-control", placeholder: "Description"  %>
+      </div><br />
+
+        <div>
+    <% @project = Project.find(params[:project_id]) %>
+    <%= form.number_field :project_id, value: @project.id, type: :hidden %>
+  </div>
+
+        <div>
+          <%= form.submit "Add", class: "btn btn-success" %>
+        </div><br />
+</div>, 
+
+<% end %>
+
+<br>
+
+<div>
+  <%= link_to "Back to messages", messages_path %>
+</div>

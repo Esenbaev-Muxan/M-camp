@@ -1,0 +1,101 @@
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/"><h4>Hello<%= current_user.email %></h4></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-md-auto gap-2">
+        <li class="nav-item rounded">
+          <a class="nav-link active" aria-current="page" href="/"><i class="bi bi-house-fill me-2"></i>Home</a>
+        </li>
+
+        <li class="nav-item rounded">
+         <%= link_to projects_path, class: "nav-link" do %>
+            <i class="bi bi-clipboard2-plus-fill"></i> Home Projects
+          <% end %>
+        </li>
+
+         <li class="nav-item rounded">
+         <%= link_to new_project_attacher_path, class: "nav-link" do %>
+            <i class="bi bi-file-earmark-plus"></i> New attachments
+          <% end %>
+        </li>
+       
+      </ul>
+    </div>
+  </div>
+</nav>
+<br />
+
+
+<h1 align="center">Attachers</h1>
+<br />
+
+<div class="container">
+  <table class="table table-dark">
+
+    <thead> 
+    
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">Name</th>
+        <th scope="col">File</th>
+        <th scope="col">Handle</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @attachers.each do |attacher| %> 
+      <tr>
+        <th scope="row"> <%= attacher.id %></th>
+          <td><%= attacher.name %></td>
+          <td>  <% if attacher.uploader.attached? %>
+                  <% if  attacher.uploader.image?%>
+                    <%= link_to image_tag(attacher.uploader, class: "img_upload"),  rails_blob_path(attacher.uploader, disposition: "attachment") %>
+                    <% elsif attacher.uploader.audio? %>
+                        <%= rails_blob_url(attacher.uploader, disposition: "attachment") %>
+                      <% else %>
+                          <%= link_to attacher.uploader.filename,  rails_blob_path(attacher.uploader, disposition: "attachment") %>
+                    <% end %>
+          <% end %></td>
+         
+        <td> <%= button_to 'Destroy', [attacher.project, attacher], method: :delete, class: "btn btn-danger"  %>
+        </td>
+      </tr> <% end %>
+    </tbody>
+
+  </table>
+
+</div>
+
+ 
+
+
+
+<style>
+
+.img_upload{
+   border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  width: 150px;
+}
+body {
+  font-family: Montserrat, sans-serif;
+}
+.navbar-brand {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 48px;
+  height: 48px;
+}
+
+.navbar-nav .nav-item:hover {
+  background-color: rgba(180, 190, 203, 0.4);
+}
+
+
+</style>
+

@@ -1,0 +1,24 @@
+<%= form_with(model: comment) do |form| %>
+<div class="container">
+  <div class="container">
+    <div class="mb-2">
+        <label for="exampleFormControlInput1" class="form-label">Body</label>
+        <%= form.text_field :body, class: "form-control",id: "exampleFormControlInput1", placeholder: "Name"  %>
+    </div>
+
+        <div>
+          <%= form.submit class: "btn btn-outline-success"  %>
+        </div>
+  </div>
+   
+</div>
+
+
+
+
+
+<% end %>
+
+<style>
+
+</style>

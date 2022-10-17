@@ -1,0 +1,52 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/"><h4>Hello<%= current_user.email %></h4></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-md-auto gap-2">
+        <li class="nav-item rounded">
+          <a class="nav-link active" aria-current="page" href="/"><i class="bi bi-house-fill me-2"></i>Home</a>
+        </li>
+
+        <li class="nav-item rounded">
+         <%= link_to project_messages_path(@pro), class: "nav-link" do %>
+            <i class="bi bi-clipboard2-plus-fill"></i> Home Message
+          <% end %>
+          
+        </li> 
+
+         <li class="nav-item rounded">
+         <%= link_to edit_message_path(@message), class: "nav-link" do %>
+            <i class="bi bi-pencil"></i> Edit Massage
+          <% end %>
+          
+        </li> 
+
+
+      </ul>
+    </div>
+  </div>
+</nav><br />
+
+  <h1 align="center">
+    <%=  @message.title %>
+  </h1>
+
+<div>
+
+  <%= button_to "Destroy this message", @message, method: :delete, class: "btn btn-outline-danger" %>
+</div><br />
+
+<div class="container border"><br />
+  <%= render 'comments/form', 
+    message: @message, 
+    comment: @message.comments.build,
+    submit_label: "Comment" %>
+  <% @comments.each do |comment| %>
+    <%= render 'comments/comment', 
+    message: @message, 
+    comment: comment %>
+  <% end %>
+</div>

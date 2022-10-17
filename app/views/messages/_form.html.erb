@@ -1,0 +1,34 @@
+<%= form_with(model: message) do |form| %>
+  <% if message.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(disc.errors.count, "error") %> prohibited this disc from being saved:</h2>
+
+      <ul>
+        <% message.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="container border">
+      <div>
+        <%= form.label :title, style: "display: block; color: #fff; text-color: #fff" %>
+        <%= form.text_field :title %>
+      </div>
+
+      <div>
+        <%= form.label :description, style: " display: block; color: #fff" %>
+        <%= form.text_area :description  %>
+      </div>
+  </div>
+
+  
+
+  <div>
+    <% @project = Project.find(params[:project_id]) %>
+    <%= form.number_field :project_id, value: @project.id, type: :hidden %>
+  </div>
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
